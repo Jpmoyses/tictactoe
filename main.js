@@ -3,6 +3,7 @@ let playerOScore = document.querySelector(".o");
 let playerXScore = document.querySelector(".x");
 let players = 1;
 let roundWinner = 0;
+let round = 0;
 let img;
 const imgX = new Image();
 const imgO = new Image();
@@ -11,6 +12,7 @@ imgO.src = './img/o.svg';
 imgO.classList.add('imageFormat');
 imgX.classList.add('imageFormat');
 img = imgX;
+
 
 function Player(name, marker) {
     this.name =  name;
@@ -64,7 +66,9 @@ function resetAll(){
 
     // resets the gameboard
     Object.assign(gameBoard, gameBoardCopy);
-    console.log(gameBoard);
+
+    // resets round
+    round = 0;
     
 }
 
@@ -110,6 +114,10 @@ function winCondition(marker){
 
         // reset board
         resetAll();}
+    else if(round == 9){
+        alert(`It's a draw!`);
+        resetAll();
+    }
 }
 
 function checkBoard(item){
@@ -156,6 +164,7 @@ square.forEach((item) =>{
             item.appendChild(imageClick(item));
             if(players == 1){item.classList.add('1');}
             else{item.classList.add('2');}
+            round++;
 
             checkBoard(item);
             
